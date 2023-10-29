@@ -5,10 +5,11 @@ import "../../Css/DetailStory.css"
 import Loader from '../GeneralScreens/Loader';
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { RiDeleteBin6Line } from 'react-icons/ri'
-import { FiEdit } from 'react-icons/fi'
+import { FiEdit, FiArrowLeft } from 'react-icons/fi'
 import { FaRegComment } from 'react-icons/fa'
 import { BsBookmarkPlus, BsThreeDots, BsBookmarkFill } from 'react-icons/bs'
 import CommentSidebar from '../CommentScreens/CommentSidebar';
+import DOMPurify from 'dompurify';
 
 const DetailStory = () => {
   const [likeStatus, setLikeStatus] = useState(false)
@@ -164,7 +165,9 @@ const DetailStory = () => {
             <div className='Inclusive-detailStory-page'>
 
               <div className="top_detail_wrapper">
-
+                <Link to={'/'} >
+                  <FiArrowLeft />
+                </Link>
                 <h5>{story.title}</h5>
 
                 <div className='story-general-info'>
@@ -236,7 +239,7 @@ const DetailStory = () => {
 
                 </div>
 
-                <div className='content' dangerouslySetInnerHTML={{ __html: (story.content) }}>
+                <div className='content' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(story.content) }}>
                 </div>
 
               </div>
